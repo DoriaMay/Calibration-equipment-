@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from '../firebase';
+import { auth } from '../firebase'
 
 import login from "./img/login.webp";
 
@@ -34,7 +34,7 @@ function Signup() {
       await updateProfile(user, {
         displayName: values.first_name, 
       });
-      navigate('/');
+      navigate('/Home');
     })
     .catch((err) => {
       setSubmitButtonDisabled(false);
@@ -52,7 +52,7 @@ function Signup() {
                 <div class="heading">
                             <h2>Get Started</h2>
                             <h6>Already have an account?</h6>
-                            <a href="login" class="toggle">Sign in</a>
+                            <a href="/" class="toggle">Sign in</a>
                         </div>
 
                         <div class="actual-form">

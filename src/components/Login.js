@@ -29,7 +29,7 @@ function Login() {
             .then(async (res) => {
                 setSubmitButtonDisabled(false);
                 
-                navigate('/');
+                navigate('/Home');
             })
             .catch((err) => {
                 setSubmitButtonDisabled(false);

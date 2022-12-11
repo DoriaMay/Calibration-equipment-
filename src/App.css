@@ -89,6 +89,12 @@ form.sign-up-form{
     display: inline;
 }
 
+.h2{
+    text-align: center;
+    color: black;
+    
+}
+
 .toggle{
     color: #151111;
     text-decoration: none;
@@ -231,3 +237,4 @@ main.sign-up-mode .carousel {
 .image.show {
     opacity: 1;
 }
+  
