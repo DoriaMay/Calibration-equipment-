@@ -6,11 +6,9 @@ import './App.css';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
-
+import Crud  from './components/Crud/Index'
 
 function App() {
-
-  
 
   return (
     <div className="App">
@@ -19,6 +17,7 @@ function App() {
           <Route path='/' element={<Login />} />
           <Route path='/Signup' element={<Signup />} />
           <Route path='/Home' element={<Home />} />
+          <Route path='/Index' element={<Crud />} />
         </Routes>
       </Router>
     </div>

@@ -3,10 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink } from 'react-bootstrap';
 import logo from "./img/logo.png";
 import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth } from './firebase';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+
 
 function Home(props) {
   const [user] = useState(auth);
@@ -19,7 +20,7 @@ function Home(props) {
       } else setUserName("");
     });
   }, [])
- 
+
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -30,7 +31,10 @@ function Home(props) {
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse>
             <Nav className="ms-auto mb-2 my-lg-0 " style={{ maxHeight: '100px' }} >
-              <li className='nav-item'>
+            <li className="nav-item">
+                      <Nav.Link className="nav-link" href="/Index" >Add Itme's</Nav.Link>
+                    </li>
+             <li className='nav-item'>
                 <Nav.Link>{userName}</Nav.Link></li>
               {
                 user ?
@@ -45,7 +49,7 @@ function Home(props) {
                       <Nav.Link className="nav-link" href="/" >Login</Nav.Link>
                     </li>
                     <li className="nav-item">
-                      <Nav.Link className="nav-link" href="SignUp" >SignUp</Nav.Link>
+                      <Nav.Link className="nav-link" href="/Signup" >SignUp</Nav.Link>
                     </li>
                   </>
               }
@@ -53,9 +57,15 @@ function Home(props) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      </>
-    )
+      {/* <main>
+        <Router>
+          <Routes>
+            <Route path='/Index' element={<Index />} />
+          </Routes>
+        </Router>
+      </main> */}
+    </>
+  )
 }
 
-      export default Home
+export default Home
