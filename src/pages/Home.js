@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink } from 'react-bootstrap';
-import logo from "./img/logo.png";
+import logo from "../components/img/logo.png";
 import { signOut } from 'firebase/auth';
-import { auth } from './firebase';
+import { auth } from '../components/firebase';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -32,7 +32,10 @@ function Home(props) {
           <Navbar.Collapse>
             <Nav className="ms-auto mb-2 my-lg-0 " style={{ maxHeight: '100px' }} >
             <li className="nav-item">
-                      <Nav.Link className="nav-link" href="/Index" >Add Itme's</Nav.Link>
+                      <Nav.Link className="nav-link" href="/AddEditUser" >Add Itme's</Nav.Link>
+                    </li>
+                    <li className="nav-item">
+                      <Nav.Link className="nav-link" href="/ItemDetails" >Item Details</Nav.Link>
                     </li>
              <li className='nav-item'>
                 <Nav.Link>{userName}</Nav.Link></li>
@@ -57,13 +60,6 @@ function Home(props) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* <main>
-        <Router>
-          <Routes>
-            <Route path='/Index' element={<Index />} />
-          </Routes>
-        </Router>
-      </main> */}
     </>
   )
 }
