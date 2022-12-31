@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { db, storage } from '../components/firebase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
+
 
 
 const initialState = {
@@ -12,10 +13,12 @@ const initialState = {
   Calibration_due_date: "", 
 }
 
-const AddEditUser = ({user}) => {
+const AddEditUser = ({user, setActive}) => {
   const [form, setForm] = useState(initialState);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(null);
+
+  const {id} = useParams();
 
   const navigate = useNavigate();
 
@@ -57,6 +60,19 @@ const AddEditUser = ({user}) => {
     file && uploadFile();
   }, [file]);
 
+  useEffect(()=> {
+    id && getItemsDetail();
+  }, [id]);
+
+  const getItemsDetail = async () => {
+    const docRef = doc(db, "items", id);
+    const snapshot = await getDoc(docRef);
+    if (snapshot.exists()) {
+      setForm({ ...snapshot.data() });
+    }
+    setActive(null);
+  };
+
   console.log ("form", form);
 
   const handleChange = (e) => {
@@ -66,17 +82,35 @@ const AddEditUser = ({user}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(Equipment_serial_number && Equipment_group && Calibration_date && Calibration_due_date ){
-      try{
-        await addDoc(collection(db, "items"), {
-          ...form,
-          timesTamp: serverTimestamp(),
-          author: user.displayName,
-          userId: user.uid,
-        })
-      }catch (err) {
-        console.log(err);
-      }
+      if(!id){
+        try{
+          await addDoc(collection(db, "items"), {
+            ...form,
+            timesTamp: serverTimestamp(),
+            author: user.displayName,
+            userId: user.uid,
+          });
+          alert("Add Item's successfully");
+        }catch (err) {
+          console.log(err);
+        } 
+      } else{
+        try{
+          await updateDoc(doc(db, "items", id), {
+            ...form,
+            timesTamp: serverTimestamp(),
+            author: user.displayName,
+            userId: user.uid,
+          });
+          alert("upadete Item's successfully");
+        }catch (err) {
+          console.log(err);
+        } 
+      } 
+    } else {
+      return alert("All fields are mandatery to fill");
     }
+
     navigate("/ItemDetails")
   };
 
@@ -84,7 +118,7 @@ const AddEditUser = ({user}) => {
     <div className='container-fluid mt-5 mb-4 '>
       <div className='container'>
         <div className='col-12'>
-          <div className='text-center heading py-2'> Add Item's </div>
+          <div className='text-center heading py-2'>{id ? "Update Item's" : "Add Item's"}</div>
         </div>
         <div className='row h-100 justify-content-center align-items-center'>
           <div className='col-10 col-mb-8 col-lg-6'>
@@ -138,7 +172,8 @@ const AddEditUser = ({user}) => {
               </div>
               <div className='col-12 py-3 text-center'>
                 <button className='btn btn-add' type='submit' disabled={progress !== null && progress < 100}>
-                  Submit</button>
+                 {id ? "Update" : "Submit"}
+                 </button>
               </div>
             </form>
           </div>

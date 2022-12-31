@@ -326,11 +326,11 @@
       height: 260px;
       min-width: 100%;
   }
-
+/* 
   .hover-blogs-img:hover>.blogs-img {
       top: -7px;
       box-shadow: (0, 2px, 3px, 1px, rgba(0, 0, 0, 0.3));
-  }
+  } */
   .Equipment_serial_number {
     font-size: 17px;
 	color: #222!important;
@@ -387,4 +387,10 @@
 	float: left;
 	margin-top: 10px;
 	font-size: 14px;
+}
+
+/* spinner */
+.spinner {
+    width: 3rem;
+    height: 3rem;
 }

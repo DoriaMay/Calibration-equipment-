@@ -15,7 +15,7 @@ import NotFound from './pages/NotFound';
 import ItemDetails from './pages/ItemDetails';
 
 function App() {
-
+  const [active, setActive] = useState("ItemsDetails");
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -36,10 +36,10 @@ function App() {
           <Route path='/' element={<Login />} />
           <Route path='/Signup' element={<Signup />} />
           <Route path='/Home' element={<Home />} />
-          <Route path='/detail/:id' element={< Detail/>} />
+          <Route path='/detail/:id' element={< Detail setActive={setActive} />} />
           <Route path='/AddEditUser' element={user?.uid ? <AddEditUser user={user} /> : <Navigate to="/AddEditUser" />} />
-          <Route path='/update/:id' element={<AddEditUser />} />
-          <Route path='/ItemDetails' element={<ItemDetails />} />
+          <Route path='/update/:id' element={<AddEditUser user={user} setActive={setActive} />} />
+          <Route path='/ItemDetails' element={<ItemDetails setActive={setActive} user={user} />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>

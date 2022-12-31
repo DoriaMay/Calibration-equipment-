@@ -26,7 +26,7 @@ function Home(props) {
       <Navbar bg="light" expand="lg">
         <Container fluid>
           <NavLink className="navbar-brand" to="/Home">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" href="Home"/>
           </NavLink>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse>
