@@ -111,7 +111,7 @@ const AddEditUser = ({user, setActive}) => {
       return alert("All fields are mandatery to fill");
     }
 
-    navigate("/ItemDetails")
+    navigate("/Home")
   };
 
   return (

@@ -1,67 +1,63 @@
-import React, { useEffect, useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { NavLink } from 'react-bootstrap';
-import logo from "../components/img/logo.png";
-import { signOut } from 'firebase/auth';
-import { auth } from '../components/firebase';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { collection, deleteDoc, doc, onSnapshot} from 'firebase/firestore';
+import React, {useState, useEffect} from 'react'
+import Spinner  from '../components/Spinner';
+import { db } from '../components/firebase';
+import ItemsSection from '../components/ItemsSection';
 
+const ItemDetails = ({ user}) => {
+    const [loading, setLoading] = useState(true);
+    const [items, setItems] = useState([]);
 
-function Home(props) {
-  const [user] = useState(auth);
-  const [userName, setUserName] = useState("");
+    useEffect(() => {
+       const unsub = onSnapshot(
+        collection(db, "items"),
+        (snapshot) => {
+            let list = [];
+            snapshot.docs.forEach((doc) => {
+                list.push({id: doc.id, ...doc.data()})
+            });
+            setItems(list);
+            setLoading(false);
+        }, (error) => {
+            console.log(error);
+        }
+       );
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUserName(user.displayName)
-      } else setUserName("");
-    });
-  }, [])
+       return() => {
+        unsub();
+       };
+    }, []);
+    
+    if (loading) {
+        return <Spinner />;
+    }
 
-  return (
-    <>
-      <Navbar bg="light" expand="lg">
-        <Container fluid>
-          <NavLink className="navbar-brand" to="/Home">
-            <img src={logo} alt="logo" href="Home"/>
-          </NavLink>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse>
-            <Nav className="ms-auto mb-2 my-lg-0 " style={{ maxHeight: '100px' }} >
-            <li className="nav-item">
-                      <Nav.Link className="nav-link" href="/AddEditUser" >Add Itme's</Nav.Link>
-                    </li>
-                    <li className="nav-item">
-                      <Nav.Link className="nav-link" href="/ItemDetails" >Item Details</Nav.Link>
-                    </li>
-             <li className='nav-item'>
-                <Nav.Link>{userName}</Nav.Link></li>
-              {
-                user ?
-                  <li className="nav-item">
-                    <Nav.Link className="nav-link" href="/"
-                      onClick={() => { signOut(auth) }}
-                    >Logout</Nav.Link>
-                  </li>
-                  :
-                  <>
-                    <li className="nav-item">
-                      <Nav.Link className="nav-link" href="/" >Login</Nav.Link>
-                    </li>
-                    <li className="nav-item">
-                      <Nav.Link className="nav-link" href="/Signup" >SignUp</Nav.Link>
-                    </li>
-                  </>
-              }
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </>
-  )
+    const handleDelete = async (id) => {
+        if(window.confirm("Aur you sure wante to delete that item")) {
+            try{
+                setLoading(true);
+                await deleteDoc(doc(db, "items", id));
+                alert("items deleted")
+                setLoading(false);
+            }catch (err){
+                console.log(err);
+            }
+        }
+    };
+
+    console.log("items", items);
+
+    return (
+        <div className='container-fluid pb-4 pt-4 padding'>
+            <div className='container padding'>
+                <div className='col-mb-8'>
+                    <ItemsSection items={items} user={user} handleDelete={handleDelete}/>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+    )
 }
 
-export default Home
+export default ItemDetails

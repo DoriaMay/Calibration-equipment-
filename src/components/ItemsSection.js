@@ -1,5 +1,5 @@
 import React from 'react';
-import FontAwesome from "react-fontawesome";
+import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
 import { excerpt } from '../utility/Index';
 
@@ -31,27 +31,27 @@ const ItemsSection = ({ items, user, handleDelete }) => {
                             {excerpt(item.Equipment_group, 5)}
                         </div>
                         <Link to={`/detail/${item.id}`}>
-                            <button className='btn btn-view'>View</button>
+                            <button className='btn btn-download'>Download</button>
                         </Link>
-                        {user?.uid && item.userId === user.uid &&(
-                         <div style={{ float: "right" }}>
-                         <FontAwesome
-                             name='trash'
-                             style={{ margin: "15px", cursor: "pointer" }}
-                             size="2x"
-                             onClick={() => handleDelete(item.id)}
-                         />
-                         <Link to={`/update/${item.id}`}>
-                         <FontAwesome
-                             name='edit'
-                             style={{ cursor: "pointer" }}
-                             size="2x"
-                         />
-                         </Link>
-                         
-                     </div>    
+                        {user?.uid && item.userId === user.uid && (
+                            <div style={{ float: "right" }}>
+                                <FontAwesome
+                                    name="trash"
+                                    style={{ margin: "15px", cursor: "pointer" }}
+                                    size="2x"
+                                    onClick={() => handleDelete(item.id)}
+                                />
+                                <Link to={`/update/${item.id}`}>
+                                    <FontAwesome
+                                        name="edit"
+                                        style={{ cursor: "pointer" }}
+                                        size="2x"
+                                    />
+                                </Link>
+                            </div>
                         )}
-                        
+
+
                     </div>
                 </div>
             ))}

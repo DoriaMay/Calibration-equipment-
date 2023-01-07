@@ -1,0 +1,136 @@
+$yellow:#5c3c89;
+
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+	@if $inset {
+		-webkit-box-shadow:inset $top $left $blur $color;
+		-moz-box-shadow:inset $top $left $blur $color;
+		-o-box-shadow:inset $top $left $blur $color;
+		box-shadow:inset $top $left $blur $color;
+	} @else {
+		-webkit-box-shadow: $top $left $blur $color;
+		-moz-box-shadow: $top $left $blur $color;
+		-o-box-shadow: $top $left $blur $color;
+		box-shadow: $top $left $blur $color;
+	}
+}
+
+@mixin clip-path($clip) {
+	-webkit-clip-path: $clip;
+	-moz-clip-path: $clip;
+	-ms-clip-path: $clip;
+	clip-path: $clip;
+}
+
+@mixin transition($transition) {
+	-moz-transition:    all $transition ease;
+	-o-transition:      all $transition ease;
+	-webkit-transition: all $transition ease;
+	-ms-transition: 	all $transition ease;
+	transition:         all $transition ease;
+}
+
+.paddding {
+	padding-left: 0!important;
+	padding-right: 0!important;
+}
+
+
+
+//   Items Section
+
+.blog-heading {
+	font-size: 24px;
+	color: #222;
+    border-bottom: 1px solid #777;
+}
+
+.blogs-img {
+    height: 200px;
+	@include border-radius(5px);
+	overflow: hidden;
+	position: relative;
+	top: 0;
+	@include box-shadow(0, 2px, 3px, 1px, rgba(0,0,0,0));
+	@include transition(all 0.5s);
+}
+
+.blogs-img > img {
+    height: 260px;
+	min-width: 100%;
+}
+
+.hover-blogs-img:hover > .blogs-img {
+    top: -7px;
+	@include box-shadow(0, 2px, 3px, 1px, rgba(0,0,0,0.3));
+}
+
+.Equipment_serial_number{
+    font-size: 17px;
+	color: #222!important;
+	font-weight: 800;
+    font-family: "Poppins";
+    text-decoration: none;
+	display: block;
+}
+
+
+.fa-trash {
+	color: #c43421 !important;
+	
+}
+
+.fa-edit {
+	color: lightsalmon !important;
+}
+
+.Equipment_group{
+    display: inline-block;
+    position: relative;
+    background-color: #a9b8d1;
+    padding: 4px 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    text-transform: none;
+    line-height: 16px;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+.meta-info {
+    font-size: 15px;
+	color: #222;
+	display: block;
+    font-family: "Poppins";
+    text-decoration: none;
+}
+
+.author {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 15px !important;	
+}
+
+.btn-download {
+    background: #544e66 !important;
+	@include border-radius(0!important);
+	color: #fff!important;
+	padding: 5px 10px!important;
+	float: left;
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+// spinner
+
+.spinner {
+	width: 3rem;
+	height: 3rem;
+}
