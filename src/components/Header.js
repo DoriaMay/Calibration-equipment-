@@ -29,7 +29,7 @@ function Header({ user, handleLogout }) {
                     <Nav.Link><li className='nav-item nav-link' onClick={handleLogout}>Logout</li></Nav.Link>
                   </>
                 ) : (
-                  <Nav.Link href='/'>
+                  <Nav.Link href=''>
                     <li className='nav-item nav-link'>Login</li>
                   </Nav.Link>
                   

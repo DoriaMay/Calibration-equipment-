@@ -5,10 +5,12 @@ import { excerpt } from '../utility/Index';
 
 const ItemsSection = ({ items, user, handleDelete }) => {
     const userId = user?.uid;
+
     return (
         <div>
             <div className='blog-heading text-start py-2 md-4'>All Item's</div>
-            {items?.map((item) => (
+        
+           {items?.map((item) => (
                 <div className='row pb-4' key={item.id}>
                     <div className='col-md-5'>
                         <div className='hover-blogs-img mt-3 '>
