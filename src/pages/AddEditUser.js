@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { db, storage } from '../components/firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 
 
 
@@ -13,7 +13,7 @@ const initialState = {
   Calibration_due_date: "", 
 }
 
-const AddEditUser = ({user, setActive}) => {
+const AddEditUser = ({user}) => {
   const [form, setForm] = useState(initialState);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(null);
@@ -60,18 +60,7 @@ const AddEditUser = ({user, setActive}) => {
     file && uploadFile();
   }, [file]);
 
-  useEffect(()=> {
-    id && getItemsDetail();
-  }, [id]);
 
-  const getItemsDetail = async () => {
-    const docRef = doc(db, "items", id);
-    const snapshot = await getDoc(docRef);
-    if (snapshot.exists()) {
-      setForm({ ...snapshot.data() });
-    }
-    setActive(null);
-  };
 
   console.log ("form", form);
 

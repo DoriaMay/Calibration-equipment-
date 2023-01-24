@@ -41,8 +41,6 @@ $yellow:#5c3c89;
 	padding-right: 0!important;
 }
 
-
-
 //   Items Section
 
 .blog-heading {
@@ -52,7 +50,7 @@ $yellow:#5c3c89;
 }
 
 .blogs-img {
-    height: 200px;
+    height: 250px;
 	@include border-radius(5px);
 	overflow: hidden;
 	position: relative;
@@ -79,7 +77,6 @@ $yellow:#5c3c89;
     text-decoration: none;
 	display: block;
 }
-
 
 .fa-trash {
 	color: #c43421 !important;
@@ -119,7 +116,7 @@ $yellow:#5c3c89;
 }
 
 .btn-download {
-    background: #544e66 !important;
+    background: #4648b1 !important;
 	@include border-radius(0!important);
 	color: #fff!important;
 	padding: 5px 10px!important;
@@ -133,4 +130,11 @@ $yellow:#5c3c89;
 .spinner {
 	width: 3rem;
 	height: 3rem;
+}
+
+// Search
+
+.search {
+	font-size: 20px;
+	border-radius: 5px;
 }

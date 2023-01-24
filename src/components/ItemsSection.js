@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
 import { excerpt } from '../utility/Index';
 
-const ItemsSection = ({ items, user, handleDelete }) => {
+const ItemsSection = ({ items, user, handleDelete}) => {
     const userId = user?.uid;
+
+    const [searchTerm, setSearchTerm] = useState("");
 
     return (
         <div>
-            <div className='blog-heading text-start py-2 md-4'>All Item's</div>
-        
-           {items?.map((item) => (
+            <div className='blog-heading text-start py-2 md-4'>All item's     
+                        <div style={{ float: "right" }}>
+                            <input type="text"
+                            className='search'
+                            placeholder='search...'
+                            onChange={(e) => {
+                                setSearchTerm(e.target.value);
+                            }}
+                            />
+                        </div>
+            </div>
+            {items?.filter((val) => {
+                if(searchTerm === "") {
+                    return val;
+                }else if(
+                    val.Equipment_serial_number.toLowerCase().includes(searchTerm.toLocaleLowerCase())||
+                    val.Equipment_group.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+                ){
+                    return val;
+                }
+            }).map((item) => (
                 <div className='row pb-4' key={item.id}>
                     <div className='col-md-5'>
                         <div className='hover-blogs-img mt-3 '>
@@ -32,9 +52,9 @@ const ItemsSection = ({ items, user, handleDelete }) => {
                         <div className='shot-date'>
                             {excerpt(item.Equipment_group, 5)}
                         </div>
-                        <Link to={`/detail/${item.id}`}>
+                        <a href={item.imgUrl} download  onClick={(e) => e.stopPropagation()}>
                             <button className='btn btn-download'>Download</button>
-                        </Link>
+                        </a>
                         {user?.uid && item.userId === user.uid && (
                             <div style={{ float: "right" }}>
                                 <FontAwesome

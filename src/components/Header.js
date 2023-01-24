@@ -21,7 +21,7 @@ function Header({ user, handleLogout }) {
           <Navbar.Collapse>
             <Nav className="ms-auto mb-2 my-lg-0 " style={{ maxHeight: '100px' }} >
               <li className="nav-item nav-link">
-                <Nav.Link href="/AddEditUser" >Add Itme's</Nav.Link>
+                <Nav.Link href="/AddEditUser" >Add item's</Nav.Link>
               </li>
                 {userId ? (
                   <>
