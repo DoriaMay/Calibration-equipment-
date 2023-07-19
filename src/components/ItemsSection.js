@@ -14,7 +14,7 @@ const ItemsSection = ({ items, user, handleDelete}) => {
                         <div style={{ float: "right" }}>
                             <input type="text"
                             className='search'
-                            placeholder='search...'
+                            placeholder='  search...'
                             onChange={(e) => {
                                 setSearchTerm(e.target.value);
                             }}
